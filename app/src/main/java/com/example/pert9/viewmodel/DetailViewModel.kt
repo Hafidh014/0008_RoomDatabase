@@ -17,7 +17,7 @@ class DetailViewModel(
 ) : ViewModel() {
 
     private val idSiswa: Int = checkNotNull(savedStateHandle[DestinasiDetailSiswa.itemIdArg])
-    val uiDetailState: StateFlow<DetailSiswaUiState> =
+    val uiState: StateFlow<DetailSiswaUiState> =
         repositoriSiswa.getSiswaStream(idSiswa)
             .filterNotNull()
             .map {
@@ -29,7 +29,7 @@ class DetailViewModel(
             )
 
     suspend fun deleteSiswa() {
-        repositoriSiswa.deleteSiswa(uiDetailState.value.detailSiswa.toSiswa())
+        repositoriSiswa.deleteSiswa(uiState.value.detailSiswa.toSiswa())
     }
 
     companion object {
@@ -40,3 +40,5 @@ class DetailViewModel(
 data class DetailSiswaUiState(
     val detailSiswa: DetailSiswa = DetailSiswa()
 )
+
+
