@@ -16,16 +16,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.pert9.R
-import com.example.pert9.uicontroller.DestinasiEntry
-import com.example.pert9.uicontroller.DestinasiHome
 import com.example.pert9.view.EntrySiswaScreen
 import com.example.pert9.view.HomeScreen
 
 @Composable
-fun SiswaApp(
-    navController: NavHostController = rememberNavController()
-) {
-    HostNavigasi(navController = navController)
+fun SiswaApp(navController: NavHostController = rememberNavController()) {
+    HostNavigasi(navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -44,10 +40,7 @@ fun SiswaTopAppBar(
         navigationIcon = {
             if (canNavigateBack) {
                 IconButton(onClick = navigateUp) {
-                    Icon(
-                        imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = stringResource(R.string.back)
-                    )
+                    Icon(Icons.Filled.ArrowBack, stringResource(R.string.back))
                 }
             }
         }
@@ -62,7 +55,7 @@ fun HostNavigasi(
     NavHost(
         navController = navController,
         startDestination = DestinasiHome.route,
-        modifier = Modifier
+        modifier = modifier
     ) {
         composable(DestinasiHome.route) {
             HomeScreen(
@@ -72,12 +65,5 @@ fun HostNavigasi(
             )
         }
 
-        composable(DestinasiEntry.route) {
-            EntrySiswaScreen(
-                navigateBack = {
-                    navController.popBackStack()
-                }
-            )
-        }
     }
 }
